@@ -5,27 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="870fdde8-3652-4972-91ca-ee7dce20938c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/CompServer.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/results.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/session.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repositories/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repositories/results.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scheduler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/schemas/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/schemas/results.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/measurements.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tasks/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tasks/measurements.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,29 +26,41 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "pieczares"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/pieczares/CompServer",
+    "accountId": "c7b70ba9-7244-4993-b087-6d416df1e0d9"
+  }
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0000000000000289" />
-      <entry key="M2" value="1.0000001699798025" />
-      <entry key="M5" value="1.0019595616348906" />
-      <entry key="M10" value="1.0442669361362469" />
-      <entry key="M15" value="1.1251371643102281" />
-      <entry key="M30" value="1.3537473170360848" />
-      <entry key="H1" value="1.5947666071965412" />
-      <entry key="H2" value="1.7712111301041635" />
-      <entry key="H4" value="1.8781862730105519" />
-      <entry key="D1" value="1.9785832414492344" />
-      <entry key="W1" value="1.996912002659143" />
+      <entry key="MS100" value="1.3789291416275995" />
+      <entry key="MS500" value="1.8235910172675731" />
+      <entry key="S2" value="1.9526379980439375" />
+      <entry key="S5" value="1.9807790039885513" />
+      <entry key="S10" value="1.9903428719360745" />
+      <entry key="S30" value="1.9972498642128442" />
+      <entry key="S60" value="2.053199726332692" />
+      <entry key="M2" value="2.6018483458543704" />
+      <entry key="M5" value="4.599401593423845" />
+      <entry key="M10" value="6.27968743357396" />
+      <entry key="M15" value="7.102551089221251" />
+      <entry key="M30" value="8.211235478563609" />
+      <entry key="H1" value="8.973629017771568" />
+      <entry key="H2" value="9.44435869172389" />
+      <entry key="H4" value="9.710040080060441" />
+      <entry key="D1" value="9.94983771705957" />
+      <entry key="W1" value="9.992786901258965" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -89,23 +82,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8235910172675731" />
-      <entry key="MS500" value="0.9619274546647747" />
-      <entry key="S2" value="0.9903428719330246" />
-      <entry key="S5" value="0.9961258995541646" />
-      <entry key="S10" value="0.9980610700524115" />
-      <entry key="S30" value="0.9993532718503372" />
-      <entry key="S60" value="0.9996765836261218" />
-      <entry key="M2" value="0.9998384481631075" />
-      <entry key="M5" value="1.0018923181161992" />
-      <entry key="M10" value="1.0442057566933616" />
-      <entry key="M15" value="1.1250612556579629" />
-      <entry key="M30" value="1.3536597141411946" />
-      <entry key="H1" value="1.5946966320482443" />
-      <entry key="H2" value="1.7711665615846144" />
-      <entry key="H4" value="1.8781610843156136" />
-      <entry key="D1" value="1.9785785890221221" />
-      <entry key="W1" value="1.996911326177995" />
+      <entry key="MS100" value="1.0246565007507213" />
+      <entry key="MS500" value="1.5603202379050127" />
+      <entry key="S2" value="1.8661080378544401" />
+      <entry key="S5" value="1.9441851128157712" />
+      <entry key="S10" value="1.9717018493669574" />
+      <entry key="S30" value="1.9909583097249204" />
+      <entry key="S60" value="2.050038141479105" />
+      <entry key="M2" value="2.6002323845028488" />
+      <entry key="M5" value="4.598701732111012" />
+      <entry key="M10" value="6.279299910775369" />
+      <entry key="M15" value="7.102260458839977" />
+      <entry key="M30" value="8.211041689210319" />
+      <entry key="H1" value="8.9735038385388" />
+      <entry key="H2" value="9.444285056617995" />
+      <entry key="H4" value="9.709999794614111" />
+      <entry key="D1" value="9.949830448090955" />
+      <entry key="W1" value="9.992785848194098" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
@@ -161,12 +154,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1792264247674</updated>
-      <workItem from="1792264248687" duration="4021000" />
+      <workItem from="1792264248687" duration="6056000" />
     </task>
+    <task id="LOCAL-00001" summary="przykladowy serwer testowo">
+      <option name="closed" value="true" />
+      <created>1792268558017</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1792268558017</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="przykladowy serwer testowo" />
+    <option name="LAST_COMMIT_MESSAGE" value="przykladowy serwer testowo" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CompServer$main.coverage" NAME="main Coverage Results" MODIFIED="1792266091720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

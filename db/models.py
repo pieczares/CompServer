@@ -25,7 +25,12 @@ class Hurtownia(Base):
     )
 
     nazwa: Mapped[str] = mapped_column(
-        Text,
+        String(50),
+        nullable=False,
+    )
+
+    link: Mapped[str] = mapped_column(
+        String(255),
         nullable=False,
     )
 

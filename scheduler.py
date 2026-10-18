@@ -1,18 +1,23 @@
+from datetime import datetime, timezone
+
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from tasks.measurements import collect_measurement
+from tasks.productlinks import refresh_product_links
 
 
 def create_scheduler() -> BackgroundScheduler:
     scheduler = BackgroundScheduler(timezone="UTC")
 
     scheduler.add_job(
-        collect_measurement,
+        refresh_product_links,
         trigger="interval",
-        seconds=30,
-        id="collect_measurement",
+        days=1,
+        next_run_time=datetime.now(timezone.utc),
+        id="refresh_product_links",
+        replace_existing=True,
         max_instances=1,
         coalesce=True,
+        misfire_grace_time=3600,
     )
 
     return scheduler

@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from api.results import router as results_router
+# from api.results import router as results_router
 from db.session import Base, engine
 from scheduler import create_scheduler
 
@@ -13,8 +13,6 @@ logging.basicConfig(level=logging.INFO)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Model TaskResult jest importowany przez moduł repozytorium,
-    # więc jego tabela jest już zarejestrowana w Base.metadata.
     Base.metadata.create_all(bind=engine)
 
     scheduler = create_scheduler()
@@ -32,9 +30,18 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-app.include_router(results_router)
+# app.include_router(results_router)
 
 
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(
+        app,
+        host="127.0.0.1",
+        port=8000,
+    )

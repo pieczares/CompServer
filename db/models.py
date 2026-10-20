@@ -3,7 +3,7 @@ from __future__ import annotations
 from decimal import Decimal
 from typing import Literal
 
-from sqlalchemy import Enum, ForeignKey, Integer, Numeric, String, Text
+from sqlalchemy import Enum, ForeignKey, Integer, Numeric, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from db.session import Base
@@ -82,11 +82,18 @@ class ProductLink(Base):
 class Produkt(Base):
     __tablename__ = "produkt"
 
-    __table_args__ = {
-        "mysql_engine": "InnoDB",
-        "mysql_charset": "utf8mb4",
-        "mysql_collate": "utf8mb4_unicode_ci",
-    }
+    __table_args__ = (
+        UniqueConstraint(
+            "hurtownia_id",
+            "kod",
+            name="uq_produkt_hurtownia_kod",
+        ),
+        {
+            "mysql_engine": "InnoDB",
+            "mysql_charset": "utf8mb4",
+            "mysql_collate": "utf8mb4_unicode_ci",
+        },
+    )
 
     produkt_id: Mapped[int] = mapped_column(
         Integer,

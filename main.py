@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-# from api.results import router as results_router
+from api.produkty import router as produkty_router
 from db.session import Base, engine
 from scheduler import create_scheduler
 
@@ -30,8 +30,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# app.include_router(results_router)
-
+app.include_router(produkty_router)
 
 @app.get("/health")
 def health():

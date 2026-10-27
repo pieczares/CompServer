@@ -13,16 +13,7 @@ def get_products(
     linki: list[str],
     liczba_watkow: int = 5,
 ) -> tuple[list[dict], list[dict]]:
-    """
-    Pobiera dane z kart produktów.
 
-    Zwraca:
-        produkty — lista słowników z odczytanymi danymi;
-        bledy — lista adresów, których nie udało się przetworzyć.
-
-    Ceny są obiektami Decimal.
-    Jednostka to "szt", "kg" albo None.
-    """
 
     if liczba_watkow < 1:
         raise ValueError("Liczba wątków musi być dodatnia.")
@@ -70,13 +61,7 @@ def get_products(
     def odczytaj_ceny(
         tekst: str,
     ) -> tuple[Decimal | None, Decimal | None, str | None]:
-        """
-        Oczekiwany układ:
-            Cena brutto: 4,05 zł / szt. 3,29 zł / szt.
 
-        Zwraca:
-            cena_netto, cena_brutto, jednostka
-        """
 
         kwota = r"\d+(?:[ ]\d{3})*[,.]\d{2}"
         jednostka = r"(?:szt\.?|kg)"

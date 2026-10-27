@@ -138,3 +138,30 @@ class Produkt(Base):
     hurtownia: Mapped[Hurtownia] = relationship(
         back_populates="produkty",
     )
+
+
+
+class Nazwy_produktow(Base):
+    __tablename__ = "nazwy_produktow"
+
+    __table_args__ = (
+        UniqueConstraint(
+            "kod",
+        ),
+        {
+            "mysql_engine": "InnoDB",
+            "mysql_charset": "utf8mb4",
+            "mysql_collate": "utf8mb4_unicode_ci",
+        },
+    )
+
+    kod: Mapped[str] = mapped_column(
+        String(13),
+        primary_key=True,
+        nullable=False,
+    )
+
+    nazwa: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+    )

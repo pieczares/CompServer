@@ -3,7 +3,7 @@ from decimal import Decimal
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from db.models import Produkt
+from db.models import Produkt, Hurtownia, Nazwy_produktow
 
 
 def save_product(
@@ -72,15 +72,25 @@ def save_product(
     return "updated"
 
 
-def get_products_from_db(
+def get_oferty_from_db(
     session: Session,
     *,
     hurtownia_id: int | None = None,
     kod: str | None = None,
-    limit: int = 100,
-    offset: int = 0,
-) -> list[Produkt]:
-    statement = select(Produkt)
+) -> list[dict]:
+    statement = (
+        select(
+            Hurtownia.nazwa.label("hurtownia"),
+            Produkt.netto.label("cena_netto"),
+            Produkt.brutto.label("cena_brutto"),
+            Produkt.jednostka.label("jednostka"),
+        )
+        .select_from(Produkt)
+        .join(
+            Hurtownia,
+            Produkt.hurtownia_id == Hurtownia.hurtownia_id,
+        )
+    )
 
     if hurtownia_id is not None:
         statement = statement.where(
@@ -94,10 +104,41 @@ def get_products_from_db(
 
     statement = (
         statement
-        .order_by(Produkt.kod)
-        .order_by(Produkt.hurtownia_id)
+        .order_by(Produkt.produkt_id)
+    )
+
+    rows = session.execute(statement).mappings().all()
+
+    return [dict(row) for row in rows]
+
+
+def get_produkty_from_db(
+    session: Session,
+    *,
+    kod: str | None = None,
+    limit: int = 100,
+    offset: int = 0,
+) -> list[dict]:
+    statement = (
+        select(
+            Nazwy_produktow.kod.label("kod"),
+            Nazwy_produktow.nazwa.label("nazwa"),
+        )
+        .select_from(Nazwy_produktow)
+    )
+
+    if kod is not None:
+        statement = statement.where(
+            Nazwy_produktow.kod == kod
+        )
+
+    statement = (
+        statement
+        .order_by(Nazwy_produktow.kod)
         .offset(offset)
         .limit(limit)
     )
 
-    return list(session.scalars(statement).all())
+    rows = session.execute(statement).mappings().all()
+
+    return [dict(row) for row in rows]

@@ -4,18 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="870fdde8-3652-4972-91ca-ee7dce20938c" name="Changes" comment="pobieranie linkow i zapis do bazy">
-      <change afterPath="$PROJECT_DIR$/api/produkty.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repositories/produkty.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/schemas/produkty.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/get_products.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tasks/produkty.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CompServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CompServer.iml" afterDir="false" />
+    <list default="true" id="870fdde8-3652-4972-91ca-ee7dce20938c" name="Changes" comment="pobieranie, zapis i wysylanie produktow">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/produkty.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/produkty.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/productlinks.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/productlinks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/scheduler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repositories/produkty.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/produkty.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/produkty.py" beforeDir="false" afterPath="$PROJECT_DIR$/schemas/produkty.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/get_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/get_products.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,61 +48,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="3.2798439534000324E-33" />
-      <entry key="MS500" value="3.286104246453852E-7" />
-      <entry key="S2" value="0.033773403230306316" />
-      <entry key="S5" value="0.3826285049149659" />
-      <entry key="S10" value="0.8715612347681272" />
-      <entry key="S30" value="1.516465350538216" />
-      <entry key="S60" value="1.8157941261591155" />
-      <entry key="M2" value="2.4161483700415936" />
-      <entry key="M5" value="3.939247503640457" />
-      <entry key="M10" value="5.619717748747114" />
-      <entry key="M15" value="6.909217998461045" />
-      <entry key="M30" value="10.685079323490978" />
-      <entry key="H1" value="17.83499945112776" />
-      <entry key="H2" value="27.213867828645675" />
-      <entry key="H4" value="35.68287423359761" />
-      <entry key="D1" value="46.32114743922673" />
-      <entry key="W1" value="48.603948057956394" />
+      <entry key="MS100" value="1.033256468955684" />
+      <entry key="MS500" value="1.6919181102426628" />
+      <entry key="S2" value="2.5868792289667466" />
+      <entry key="S5" value="3.498032679662305" />
+      <entry key="S10" value="4.42816985653028" />
+      <entry key="S30" value="7.94867046651136" />
+      <entry key="S60" value="12.436803213129277" />
+      <entry key="M2" value="16.844523354009464" />
+      <entry key="M5" value="20.749053665044556" />
+      <entry key="M10" value="23.211572487889384" />
+      <entry key="M15" value="25.82541482632145" />
+      <entry key="M30" value="34.744843424237764" />
+      <entry key="H1" value="50.447008032553114" />
+      <entry key="H2" value="70.71431157421729" />
+      <entry key="H4" value="89.98953296684212" />
+      <entry key="D1" value="116.07800991753612" />
+      <entry key="W1" value="121.96757082057958" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.000000000001445" />
-      <entry key="S2" value="1.0011097142247465" />
-      <entry key="S5" value="1.076672475603025" />
-      <entry key="S10" value="1.361735148599157" />
-      <entry key="S30" value="2.107924233858764" />
-      <entry key="S60" value="2.48457958889603" />
-      <entry key="M2" value="2.721989219538557" />
-      <entry key="M5" value="2.8982726239607883" />
-      <entry key="M10" value="3.07793524121317" />
-      <entry key="M15" value="3.33947167632536" />
-      <entry key="M30" value="4.661321417699577" />
-      <entry key="H1" value="7.28140252398521" />
-      <entry key="H2" value="10.104422351045312" />
-      <entry key="H4" value="12.214603784936948" />
-      <entry key="D1" value="14.480177608077602" />
-      <entry key="W1" value="14.924247711486736" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="2.2444718612152878E-145" />
+      <entry key="S10" value="4.746971643850688E-73" />
+      <entry key="S30" value="1.0168684873176188E-24" />
+      <entry key="S60" value="1.9327520442857206E-12" />
+      <entry key="M2" value="3.2416150627199E-6" />
+      <entry key="M5" value="0.020361196353635227" />
+      <entry key="M10" value="0.4101054792211173" />
+      <entry key="M15" value="1.1509081429029018" />
+      <entry key="M30" value="3.52320941211202" />
+      <entry key="H1" value="7.3351293000914595" />
+      <entry key="H2" value="12.223589102721293" />
+      <entry key="H4" value="16.738927047327408" />
+      <entry key="D1" value="22.527099867265104" />
+      <entry key="W1" value="23.78191618696957" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.064466440875832E-26" />
-      <entry key="MS500" value="6.425279563968673E-6" />
-      <entry key="S2" value="0.06839972083047018" />
-      <entry key="S5" value="0.6505298637289808" />
-      <entry key="S10" value="1.6257147408828228" />
-      <entry key="S30" value="3.3309632343041815" />
-      <entry key="S60" value="4.136107362340127" />
-      <entry key="M2" value="5.050059074090002" />
-      <entry key="M5" value="6.799264787440724" />
-      <entry key="M10" value="8.676289265460259" />
-      <entry key="M15" value="10.233123534030387" />
-      <entry key="M30" value="15.337049123738968" />
-      <entry key="H1" value="25.110684511045708" />
-      <entry key="H2" value="37.31491718118678" />
-      <entry key="H4" value="47.89559892941434" />
-      <entry key="D1" value="60.8009765839299" />
-      <entry key="W1" value="63.52814498168116" />
+      <entry key="MS100" value="0.9913832850122314" />
+      <entry key="MS500" value="1.6780873956371354" />
+      <entry key="S2" value="2.5813120189151393" />
+      <entry key="S5" value="3.4949097317604787" />
+      <entry key="S10" value="4.425669797011458" />
+      <entry key="S30" value="7.943359132357262" />
+      <entry key="S60" value="12.431275427834363" />
+      <entry key="M2" value="16.840461833269913" />
+      <entry key="M5" value="20.767125808917942" />
+      <entry key="M10" value="23.618460353966814" />
+      <entry key="M15" value="26.971666463621933" />
+      <entry key="M30" value="38.26156212773718" />
+      <entry key="H1" value="57.77568735682764" />
+      <entry key="H2" value="82.93290758557846" />
+      <entry key="H4" value="106.72523559094498" />
+      <entry key="D1" value="138.60442798218517" />
+      <entry key="W1" value="145.74938528780513" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -203,7 +198,9 @@
       <workItem from="1792405990572" duration="1863000" />
       <workItem from="1792495150001" duration="4130000" />
       <workItem from="1792508134197" duration="52000" />
-      <workItem from="1792508192830" duration="186000" />
+      <workItem from="1792508192830" duration="557000" />
+      <workItem from="1792530279738" duration="488000" />
+      <workItem from="1793099849791" duration="7172000" />
     </task>
     <task id="LOCAL-00001" summary="przykladowy serwer testowo">
       <option name="closed" value="true" />
@@ -229,21 +226,41 @@
       <option name="project" value="LOCAL" />
       <updated>1792315471148</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="pobieranie, zapis i wysylanie produktow">
+      <option name="closed" value="true" />
+      <created>1792508721828</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1792508721828</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="przykladowy serwer testowo" />
     <MESSAGE value="zmiana bazy" />
     <MESSAGE value="pobieranie linkow i zapis do bazy" />
-    <option name="LAST_COMMIT_MESSAGE" value="pobieranie linkow i zapis do bazy" />
+    <MESSAGE value="pobieranie, zapis i wysylanie produktow" />
+    <option name="LAST_COMMIT_MESSAGE" value="pobieranie, zapis i wysylanie produktow" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CompServer$get_products.coverage" NAME="get_products Coverage Results" MODIFIED="1792402519013" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/services" />
-    <SUITE FILE_PATH="coverage/CompServer$main.coverage" NAME="main Coverage Results" MODIFIED="1792508205105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CompServer$main.coverage" NAME="main Coverage Results" MODIFIED="1793108438117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CompServer$session.coverage" NAME="session Coverage Results" MODIFIED="1792268366570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/db" />
     <SUITE FILE_PATH="coverage/CompServer$scheduler.coverage" NAME="scheduler Coverage Results" MODIFIED="1792405868369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

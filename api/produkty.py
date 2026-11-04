@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Query
 
 from db.session import SessionLocal
-from repositories.produkty import get_oferty_from_db, get_produkty_from_db
-from schemas.produkty import OfertaResponse, ProduktResponse
+from repositories.produkty import get_oferty_from_db, get_produkty_from_db, get_produkty_count_from_db
+from schemas.produkty import OfertaResponse, ProduktResponse, CountResponse
 
 router = APIRouter(
     prefix="/produkty",
@@ -75,3 +75,13 @@ def get_produkty(
             ProduktResponse.model_validate(produkt)
             for produkt in produkty
         ]
+
+@router.get(
+    "/count",
+    response_model=CountResponse,
+    summary="Pobierz liczbę produktów",
+)
+def get_produkty_count() -> CountResponse:
+    with SessionLocal() as session:
+        count = get_produkty_count_from_db(session=session)
+        return CountResponse.model_validate({"count": count})

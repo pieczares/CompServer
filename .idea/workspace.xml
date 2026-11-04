@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="870fdde8-3652-4972-91ca-ee7dce20938c" name="Changes" comment="pobieranie, zapis i wysylanie produktow">
+    <list default="true" id="870fdde8-3652-4972-91ca-ee7dce20938c" name="Changes" comment="zmiana api ofert, dodane api produktu, zmiana w bazie">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/produkty.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/produkty.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/repositories/produkty.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/produkty.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schemas/produkty.py" beforeDir="false" afterPath="$PROJECT_DIR$/schemas/produkty.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/get_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/get_products.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +23,17 @@
       <list>
         <option value="Python Script" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -48,61 +57,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.033256468955684" />
-      <entry key="MS500" value="1.6919181102426628" />
-      <entry key="S2" value="2.5868792289667466" />
-      <entry key="S5" value="3.498032679662305" />
-      <entry key="S10" value="4.42816985653028" />
-      <entry key="S30" value="7.94867046651136" />
-      <entry key="S60" value="12.436803213129277" />
-      <entry key="M2" value="16.844523354009464" />
-      <entry key="M5" value="20.749053665044556" />
-      <entry key="M10" value="23.211572487889384" />
-      <entry key="M15" value="25.82541482632145" />
-      <entry key="M30" value="34.744843424237764" />
-      <entry key="H1" value="50.447008032553114" />
-      <entry key="H2" value="70.71431157421729" />
-      <entry key="H4" value="89.98953296684212" />
-      <entry key="D1" value="116.07800991753612" />
-      <entry key="W1" value="121.96757082057958" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0000000001027725" />
+      <entry key="S30" value="1.0009581371668657" />
+      <entry key="S60" value="1.0557366838445401" />
+      <entry key="M2" value="1.547003840114094" />
+      <entry key="M5" value="4.640534413312972" />
+      <entry key="M10" value="9.848278546437207" />
+      <entry key="M15" value="14.148386977182621" />
+      <entry key="M30" value="25.711829870311732" />
+      <entry key="H1" value="46.59476545802598" />
+      <entry key="H2" value="76.42933173068259" />
+      <entry key="H4" value="107.30413621862071" />
+      <entry key="D1" value="152.43706639772623" />
+      <entry key="W1" value="163.11137724568894" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="2.2444718612152878E-145" />
-      <entry key="S10" value="4.746971643850688E-73" />
-      <entry key="S30" value="1.0168684873176188E-24" />
-      <entry key="S60" value="1.9327520442857206E-12" />
-      <entry key="M2" value="3.2416150627199E-6" />
-      <entry key="M5" value="0.020361196353635227" />
-      <entry key="M10" value="0.4101054792211173" />
-      <entry key="M15" value="1.1509081429029018" />
-      <entry key="M30" value="3.52320941211202" />
-      <entry key="H1" value="7.3351293000914595" />
-      <entry key="H2" value="12.223589102721293" />
-      <entry key="H4" value="16.738927047327408" />
-      <entry key="D1" value="22.527099867265104" />
-      <entry key="W1" value="23.78191618696957" />
+      <entry key="MS500" value="2.496149297055941E-171" />
+      <entry key="S2" value="2.235209618449151E-43" />
+      <entry key="S5" value="8.744074131419236E-18" />
+      <entry key="S10" value="3.1500576732042917E-9" />
+      <entry key="S30" value="0.0020209831158134305" />
+      <entry key="S60" value="0.06409666093475637" />
+      <entry key="M2" value="0.43672984807833803" />
+      <entry key="M5" value="2.117514495698759" />
+      <entry key="M10" value="4.394720688486707" />
+      <entry key="M15" value="5.871130860843601" />
+      <entry key="M30" value="8.61597488825728" />
+      <entry key="H1" value="12.645137997042411" />
+      <entry key="H2" value="18.617510021240665" />
+      <entry key="H4" value="25.034602397019988" />
+      <entry key="D1" value="34.42026125622196" />
+      <entry key="W1" value="36.61336791441085" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9913832850122314" />
-      <entry key="MS500" value="1.6780873956371354" />
-      <entry key="S2" value="2.5813120189151393" />
-      <entry key="S5" value="3.4949097317604787" />
-      <entry key="S10" value="4.425669797011458" />
-      <entry key="S30" value="7.943359132357262" />
-      <entry key="S60" value="12.431275427834363" />
-      <entry key="M2" value="16.840461833269913" />
-      <entry key="M5" value="20.767125808917942" />
-      <entry key="M10" value="23.618460353966814" />
-      <entry key="M15" value="26.971666463621933" />
-      <entry key="M30" value="38.26156212773718" />
-      <entry key="H1" value="57.77568735682764" />
-      <entry key="H2" value="82.93290758557846" />
-      <entry key="H4" value="106.72523559094498" />
-      <entry key="D1" value="138.60442798218517" />
-      <entry key="W1" value="145.74938528780513" />
+      <entry key="MS100" value="3.63888551941051E-7" />
+      <entry key="MS500" value="0.05154584678813008" />
+      <entry key="S2" value="0.47648410721699563" />
+      <entry key="S5" value="0.743394541438603" />
+      <entry key="S10" value="0.862203309395231" />
+      <entry key="S30" value="0.9546929634003982" />
+      <entry key="S60" value="1.0940427100461771" />
+      <entry key="M2" value="1.9658034134342346" />
+      <entry key="M5" value="6.738843332326555" />
+      <entry key="M10" value="14.222092651218475" />
+      <entry key="M15" value="19.99928221601612" />
+      <entry key="M30" value="34.310717822262426" />
+      <entry key="H1" value="59.226535553903354" />
+      <entry key="H2" value="95.03723591709974" />
+      <entry key="H4" value="132.3325951209561" />
+      <entry key="D1" value="186.8560114449445" />
+      <entry key="W1" value="199.72454789598532" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -143,6 +152,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMThirdPartyAiProvidersConfigurable&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
 }</component>
@@ -200,7 +210,17 @@
       <workItem from="1792508134197" duration="52000" />
       <workItem from="1792508192830" duration="557000" />
       <workItem from="1792530279738" duration="488000" />
-      <workItem from="1793099849791" duration="7172000" />
+      <workItem from="1793099849791" duration="7253000" />
+      <workItem from="1793111100704" duration="182000" />
+      <workItem from="1793120884279" duration="2781000" />
+      <workItem from="1793125378465" duration="621000" />
+      <workItem from="1793183836733" duration="1110000" />
+      <workItem from="1793188547469" duration="1241000" />
+      <workItem from="1793282045805" duration="1260000" />
+      <workItem from="1793358442655" duration="1287000" />
+      <workItem from="1793725501481" duration="2804000" />
+      <workItem from="1793787917400" duration="28000" />
+      <workItem from="1793793180870" duration="6348000" />
     </task>
     <task id="LOCAL-00001" summary="przykladowy serwer testowo">
       <option name="closed" value="true" />
@@ -234,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792508721828</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="zmiana api ofert, dodane api produktu, zmiana w bazie">
+      <option name="closed" value="true" />
+      <created>1793110719044</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1793110719044</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,11 +284,12 @@
     <MESSAGE value="zmiana bazy" />
     <MESSAGE value="pobieranie linkow i zapis do bazy" />
     <MESSAGE value="pobieranie, zapis i wysylanie produktow" />
-    <option name="LAST_COMMIT_MESSAGE" value="pobieranie, zapis i wysylanie produktow" />
+    <MESSAGE value="zmiana api ofert, dodane api produktu, zmiana w bazie" />
+    <option name="LAST_COMMIT_MESSAGE" value="zmiana api ofert, dodane api produktu, zmiana w bazie" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CompServer$get_products.coverage" NAME="get_products Coverage Results" MODIFIED="1792402519013" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/services" />
-    <SUITE FILE_PATH="coverage/CompServer$main.coverage" NAME="main Coverage Results" MODIFIED="1793108438117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CompServer$main.coverage" NAME="main Coverage Results" MODIFIED="1793802257048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CompServer$session.coverage" NAME="session Coverage Results" MODIFIED="1792268366570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/db" />
     <SUITE FILE_PATH="coverage/CompServer$scheduler.coverage" NAME="scheduler Coverage Results" MODIFIED="1792405868369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

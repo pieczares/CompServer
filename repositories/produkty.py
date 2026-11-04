@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-from sqlalchemy import select
+from sqlalchemy import select, func, distinct
 from sqlalchemy.orm import Session
 
 from db.models import Produkt, Hurtownia, Nazwy_produktow
@@ -142,3 +142,15 @@ def get_produkty_from_db(
     rows = session.execute(statement).mappings().all()
 
     return [dict(row) for row in rows]
+
+def get_produkty_count_from_db(
+    session: Session,
+) -> int:
+    statement = (
+        select(func.count(distinct(Nazwy_produktow.kod)).label("count"))
+        .select_from(Nazwy_produktow)
+    )
+
+    count = session.execute(statement).scalar_one()
+
+    return count

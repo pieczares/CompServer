@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import Literal
+from typing import Literal, Any
 
 from pydantic import BaseModel
 
@@ -13,3 +13,6 @@ class OfertaResponse(BaseModel):
 class ProduktResponse(BaseModel):
     kod: str
     nazwa: str
+
+class CountResponse(BaseModel):
+    count: int

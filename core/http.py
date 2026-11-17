@@ -1,4 +1,5 @@
 import threading
+
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -26,8 +27,7 @@ class HttpSessionProvider:
             respect_retry_after_header=True,
             raise_on_status=False,
         )
-        adapter = HTTPAdapter(max_retries=retry,
-                              pool_connections=1, pool_maxsize=1)
+        adapter = HTTPAdapter(max_retries=retry, pool_connections=1, pool_maxsize=1)
         session = requests.Session()
         session.mount("https://", adapter)
         session.mount("http://", adapter)
@@ -41,12 +41,13 @@ class HttpSessionProvider:
         return self._local.session
 
     def close(self) -> None:
-        for s in self._sessions:
-            s.close()
-        self._sessions.clear()
+        with self._lock:
+            for session in self._sessions:
+                session.close()
+            self._sessions.clear()
 
-    def __enter__(self):
+    def __enter__(self) -> "HttpSessionProvider":
         return self
 
-    def __exit__(self, *exc):
+    def __exit__(self, *exc) -> None:
         self.close()

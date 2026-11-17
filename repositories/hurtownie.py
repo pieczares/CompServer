@@ -1,13 +1,12 @@
 from sqlalchemy import select
-from sqlalchemy.orm import Session
 
 from db.models import Hurtownia
+from repositories.base import BaseRepository
 
 
-class HurtowniaRepository:
-    def __init__(self, session: Session) -> None:
-        self._session = session
-
+class HurtowniaRepository(BaseRepository):
     def get_links(self) -> list[tuple[int, str]]:
-        stmt = select(Hurtownia.hurtownia_id, Hurtownia.link).order_by(Hurtownia.hurtownia_id)
-        return [(i, l) for i, l in self._session.execute(stmt)]
+        stmt = select(Hurtownia.hurtownia_id, Hurtownia.link).order_by(
+            Hurtownia.hurtownia_id
+        )
+        return [(hid, link) for hid, link in self._session.execute(stmt)]

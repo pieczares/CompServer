@@ -4,45 +4,42 @@ from contextlib import asynccontextmanager
 import uvicorn
 from fastapi import FastAPI
 
-from api.produkty import ProduktyController
-from db.session import Base, engine, SessionLocal
-from scheduler import JobScheduler
-from services.product_link_service import ProductLinkService
-from services.product_scraper import ProductScraper
-from tasks.productlinks import RefreshProductLinksTask
-from tasks.produkty import RefreshProductsTask
-
-logging.basicConfig(level=logging.INFO)
+from core.config import Settings
+from core.container import Container
+from core.database import Database
+from db.session import Base, SessionLocal, engine
 
 
 class Application:
-    def __init__(self) -> None:
-        self.scheduler = JobScheduler(
-            RefreshProductLinksTask(SessionLocal, ProductLinkService(5, 500)),
-            RefreshProductsTask(SessionLocal, ProductScraper(threads=5),
-                                links_limit=100),
-        )
-        self.app = FastAPI(title="Serwer zadań cyklicznych",
-                           lifespan=self._lifespan)
-        self.app.include_router(ProduktyController().router)
-        self.app.add_api_route("/health", self.health, methods=["GET"])
+    def __init__(self, settings: Settings | None = None) -> None:
+        logging.basicConfig(level=logging.INFO)
+        self.settings = settings or Settings()
+        self.container = Container(
+            self.settings, Database(Base, engine, SessionLocal))
+        self.app = self._create_app()
+
+    def _create_app(self) -> FastAPI:
+        app = FastAPI(title=self.settings.app_title, lifespan=self._lifespan)
+        for controller in self.container.controllers:
+            app.include_router(controller.router)
+        return app
 
     @asynccontextmanager
     async def _lifespan(self, app: FastAPI):
-        Base.metadata.create_all(bind=engine)
-        self.scheduler.start()
+        self.container.database.create_schema()
+        self.container.scheduler.start()
         try:
             yield
         finally:
-            self.scheduler.shutdown()
-            engine.dispose()
+            self.container.scheduler.shutdown()
+            self.container.database.dispose()
 
-    @staticmethod
-    def health() -> dict:
-        return {"status": "ok"}
+    def run(self) -> None:
+        uvicorn.run(self.app, host=self.settings.host, port=self.settings.port)
 
 
-app = Application().app
+application = Application()
+app = application.app
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    application.run()

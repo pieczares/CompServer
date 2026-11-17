@@ -10,17 +10,23 @@ class ProductLinkService:
 
     def fetch(self, warehouse_url: str) -> list[str]:
         raw = LinkCrawler(warehouse_url, self._threads, self._page_limit).crawl()
+        return self._clean(raw)
+
+    def _clean(self, raw_links: list[str]) -> list[str]:
         cleaned: list[str] = []
         seen: set[str] = set()
-        for link in raw:
+        for link in raw_links:
             link = link.strip()
             if not link or link in seen:
                 continue
-            if len(link) > self.MAX_LINK_LENGTH:
-                raise ValueError(
-                    f"Pobrany link przekracza limit kolumny link "
-                    f"({self.MAX_LINK_LENGTH} znaków): {link}"
-                )
+            self._check_length(link)
             seen.add(link)
             cleaned.append(link)
         return cleaned
+
+    def _check_length(self, link: str) -> None:
+        if len(link) > self.MAX_LINK_LENGTH:
+            raise ValueError(
+                f"Pobrany link przekracza limit kolumny link "
+                f"({self.MAX_LINK_LENGTH} znaków): {link}"
+            )

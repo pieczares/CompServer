@@ -1,65 +1,17 @@
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import dataclass, field
-from decimal import Decimal
 
 from bs4 import BeautifulSoup
 
 from core.http import HttpSessionProvider
-
-
-@dataclass(frozen=True)
-class ScrapedProduct:
-    kod_producenta: str
-    cena_netto: Decimal | None
-    cena_brutto: Decimal | None
-    jednostka: str | None
-    url: str
-    uwagi: list[str] = field(default_factory=list)
-
-
-@dataclass(frozen=True)
-class ScrapeError:
-    url: str
-    blad: str
-
-
-class PriceParser:
-    _AMOUNT = r"\d+(?:[ ]\d{3})*[,.]\d{2}"
-    _UNIT = r"(?:szt\.?|kg)"
-    _PATTERN = re.compile(
-        rf"\bCena\s+brutto\s*:?\s*(?P<brutto>{_AMOUNT})\s*zł"
-        rf"(?:\s*/\s*(?P<ub>{_UNIT}))?\s*(?:\(\s*)?"
-        rf"(?P<netto>{_AMOUNT})\s*zł(?:\s*/\s*(?P<un>{_UNIT}))?",
-        re.IGNORECASE,
-    )
-
-    @staticmethod
-    def _to_decimal(text: str) -> Decimal:
-        return Decimal(text.replace(" ", "").replace(",", "."))
-
-    @staticmethod
-    def _norm_unit(unit: str | None) -> str | None:
-        return unit.lower().rstrip(".") if unit else None
-
-    def parse(self, text: str) -> tuple[Decimal | None, Decimal | None, str | None]:
-        m = self._PATTERN.search(text)
-        if m is None:
-            return None, None, None
-        ub = self._norm_unit(m.group("ub"))
-        un = self._norm_unit(m.group("un"))
-        if ub and un and ub != un:
-            raise ValueError("Różne jednostki przy cenie brutto i netto.")
-        return (self._to_decimal(m.group("netto")),
-                self._to_decimal(m.group("brutto")),
-                ub or un)
+from domain.scraping import ScrapedProduct, ScrapeError
+from services.price_parser import PriceParser
 
 
 class ProductScraper:
     _CODE = re.compile(r"Kod\s+producenta\s*:\s*(?P<kod>[^\s]+)", re.IGNORECASE)
 
-    def __init__(self, threads: int = 5,
-                 price_parser: PriceParser | None = None) -> None:
+    def __init__(self, threads: int = 5, price_parser: PriceParser | None = None) -> None:
         if threads < 1:
             raise ValueError("Liczba wątków musi być dodatnia.")
         self._threads = threads
@@ -67,11 +19,30 @@ class ProductScraper:
 
     @staticmethod
     def _page_text(soup: BeautifulSoup) -> str:
-        for el in soup(["script", "style", "noscript"]):
-            el.decompose()
+        for element in soup(["script", "style", "noscript"]):
+            element.decompose()
         text = soup.get_text(" ", strip=True)
         text = text.replace("\xa0", " ").replace("\u202f", " ")
         return re.sub(r"\s+", " ", text)
+
+    def _extract_code(self, text: str) -> str:
+        match = self._CODE.search(text)
+        if match is None:
+            raise ValueError(
+                "Brak pola „Kod producenta” — nie rozpoznano oczekiwanego układu karty."
+            )
+        return match.group("kod")
+
+    @staticmethod
+    def _build_notes(netto, brutto, unit) -> list[str]:
+        notes: list[str] = []
+        if netto is None or brutto is None:
+            notes.append(
+                "Nie znaleziono pary cen: brutto i następującej bezpośrednio po niej netto."
+            )
+        if unit is None:
+            notes.append("Nie ustalono jednostki sprzedaży: szt lub kg.")
+        return notes
 
     def _scrape_one(self, http: HttpSessionProvider, url: str) -> ScrapedProduct:
         response = http.get().get(url, timeout=http.timeout)
@@ -82,21 +53,17 @@ class ProductScraper:
             raise ValueError("Brak nagłówka h1 — nie rozpoznano karty produktu.")
 
         text = self._page_text(soup)
-        code = self._CODE.search(text)
-        if code is None:
-            raise ValueError("Brak pola „Kod producenta” — nie rozpoznano "
-                             "oczekiwanego układu karty.")
-
+        code = self._extract_code(text)
         netto, brutto, unit = self._prices.parse(text)
-        notes: list[str] = []
-        if netto is None or brutto is None:
-            notes.append("Nie znaleziono pary cen: brutto i następującej "
-                         "bezpośrednio po niej netto.")
-        if unit is None:
-            notes.append("Nie ustalono jednostki sprzedaży: szt lub kg.")
 
-        return ScrapedProduct(code.group("kod"), netto, brutto, unit,
-                              response.url, notes)
+        return ScrapedProduct(
+            kod_producenta=code,
+            cena_netto=netto,
+            cena_brutto=brutto,
+            jednostka=unit,
+            url=response.url,
+            uwagi=self._build_notes(netto, brutto, unit),
+        )
 
     def scrape(self, links: list[str]) -> tuple[list[ScrapedProduct], list[ScrapeError]]:
         links = list(dict.fromkeys(links))
@@ -105,14 +72,18 @@ class ProductScraper:
 
         with HttpSessionProvider() as http, \
                 ThreadPoolExecutor(max_workers=self._threads) as executor:
-            futures = {executor.submit(self._scrape_one, http, url): (i, url)
-                       for i, url in enumerate(links)}
+            futures = {
+                executor.submit(self._scrape_one, http, url): (index, url)
+                for index, url in enumerate(links)
+            }
             for future in as_completed(futures):
-                i, url = futures[future]
+                index, url = futures[future]
                 try:
-                    results[i] = future.result()
+                    results[index] = future.result()
                 except Exception as err:
-                    errors[i] = ScrapeError(url, f"{type(err).__name__}: {err}")
+                    errors[index] = ScrapeError(url, f"{type(err).__name__}: {err}")
 
-        return ([results[i] for i in sorted(results)],
-                [errors[i] for i in sorted(errors)])
+        return (
+            [results[i] for i in sorted(results)],
+            [errors[i] for i in sorted(errors)],
+        )

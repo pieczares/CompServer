@@ -1,38 +1,28 @@
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
+from typing import Callable
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from tasks.productlinks import refresh_product_links
-from tasks.produkty import refresh_products
 
+class JobScheduler:
+    def __init__(self, links_task: Callable[[], None],
+                 products_task: Callable[[], None]) -> None:
+        self._links_task = links_task
+        self._products_task = products_task
+        self._scheduler = BackgroundScheduler(timezone="UTC")
 
-def create_scheduler() -> BackgroundScheduler:
-    scheduler = BackgroundScheduler(timezone="UTC")
+    def _add(self, func, job_id: str, first_run: datetime, **interval) -> None:
+        self._scheduler.add_job(
+            func, trigger="interval", next_run_time=first_run, id=job_id,
+            replace_existing=True, max_instances=1, coalesce=True,
+            misfire_grace_time=3600, **interval)
 
-    # Linki: przy starcie i co 24 godziny.
-    scheduler.add_job(
-        refresh_product_links,
-        trigger="interval",
-        days=1,
-        next_run_time=datetime.now(timezone.utc),
-        id="refresh_product_links",
-        replace_existing=True,
-        max_instances=1,
-        coalesce=True,
-        misfire_grace_time=3600,
-    )
+    def start(self) -> None:
+        now = datetime.now(timezone.utc)
+        self._add(self._links_task, "refresh_product_links", now, days=1)
+        self._add(self._products_task, "refresh_products",
+                  now + timedelta(minutes=3), hours=12)
+        self._scheduler.start()
 
-    # Dane produktów: co 12 godzin.
-    scheduler.add_job(
-        refresh_products,
-        trigger="interval",
-        hours=12,
-        next_run_time=datetime.now(timezone.utc)+timedelta(minutes=3),
-        id="refresh_products",
-        replace_existing=True,
-        max_instances=1,
-        coalesce=True,
-        misfire_grace_time=3600,
-    )
-
-    return scheduler
+    def shutdown(self) -> None:
+        self._scheduler.shutdown(wait=True)

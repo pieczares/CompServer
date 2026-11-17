@@ -1,96 +1,60 @@
 import logging
 
-from db.session import SessionLocal
-from repositories.productlinks import get_links_grouped_by_hurtownia
-from repositories.produkty import save_product
-from services.get_products import get_products
+from sqlalchemy.orm import sessionmaker
 
+from repositories.productlinks import ProductLinkRepository
+from repositories.produkty import ProduktRepository
+from services.product_scraper import ProductScraper
 
 logger = logging.getLogger(__name__)
 
 
-def refresh_products() -> None:
-    logger.info("Rozpoczęto aktualizację danych produktów")
+class RefreshProductsTask:
+    def __init__(self, session_factory: sessionmaker, scraper: ProductScraper,
+                 links_limit: int | None = 100) -> None:
+        self._sf = session_factory
+        self._scraper = scraper
+        self._limit = links_limit
 
-    with SessionLocal() as session:
-        grouped_links = get_links_grouped_by_hurtownia(session)
+    def __call__(self) -> None:
+        logger.info("Rozpoczęto aktualizację danych produktów")
 
-    inserted_count = 0
-    updated_count = 0
-    error_count = 0
+        with self._sf() as session:
+            grouped = ProductLinkRepository(session).get_grouped_by_hurtownia()
 
-    for hurtownia_id, links in grouped_links.items():
-        logger.info(
-            "Pobieranie produktów: hurtownia_id=%s, liczba linków=%s",
-            hurtownia_id,
-            len(links),
-        )
-
-        try:
-            #ograniczone do testów!!!!!!!!!!!!!!!!!!!!!!
-            produkty, bledy = get_products(
-                linki=links[:100],
-                liczba_watkow=5,
-            )
-
-        except Exception:
-            error_count += 1
-
-            logger.exception(
-                "Błąd pobierania produktów hurtowni id=%s",
-                hurtownia_id,
-            )
-            continue
-
-        for blad in bledy:
-            error_count += 1
-
-            logger.warning(
-                "Nie udało się pobrać produktu: "
-                "hurtownia_id=%s, url=%s, błąd=%s",
-                hurtownia_id,
-                blad.get("url"),
-                blad.get("blad"),
-            )
-
-        for data in produkty:
-            for uwaga in data.get("uwagi", []):
-                logger.warning(
-                    "Uwaga scrapera: hurtownia_id=%s, url=%s, %s",
-                    hurtownia_id,
-                    data.get("url"),
-                    uwaga,
-                )
-
+        inserted = updated = errors = 0
+        for hid, links in grouped.items():
+            logger.info("Pobieranie produktów: hurtownia_id=%s, liczba linków=%s",
+                        hid, len(links))
             try:
-                with SessionLocal.begin() as session:
-                    operation = save_product(
-                        session=session,
-                        hurtownia_id=hurtownia_id,
-                        data=data,
-                    )
-
-                # Liczymy dopiero po pomyślnym zatwierdzeniu transakcji.
-                if operation == "inserted":
-                    inserted_count += 1
-                else:
-                    updated_count += 1
-
+                batch = links if self._limit is None else links[:self._limit]
+                products, failed = self._scraper.scrape(batch)
             except Exception:
-                error_count += 1
+                errors += 1
+                logger.exception("Błąd pobierania produktów hurtowni id=%s", hid)
+                continue
 
-                logger.exception(
-                    "Nie udało się zapisać produktu: "
-                    "hurtownia_id=%s, kod=%s, url=%s",
-                    hurtownia_id,
-                    data.get("kod_producenta"),
-                    data.get("url"),
-                )
+            for err in failed:
+                errors += 1
+                logger.warning("Nie udało się pobrać produktu: hurtownia_id=%s, "
+                               "url=%s, błąd=%s", hid, err.url, err.blad)
 
-    logger.info(
-        "Zakończono aktualizację produktów. "
-        "Dodano: %s, zaktualizowano: %s, błędy: %s",
-        inserted_count,
-        updated_count,
-        error_count,
-    )
+            for product in products:
+                for note in product.uwagi:
+                    logger.warning("Uwaga scrapera: hurtownia_id=%s, url=%s, %s",
+                                   hid, product.url, note)
+                try:
+                    with self._sf.begin() as session:
+                        op = ProduktRepository(session).save(hid, product)
+                    if op == "inserted":
+                        inserted += 1
+                    else:
+                        updated += 1
+                except Exception:
+                    errors += 1
+                    logger.exception("Nie udało się zapisać produktu: "
+                                     "hurtownia_id=%s, kod=%s, url=%s",
+                                     hid, product.kod_producenta, product.url)
+
+        logger.info("Zakończono aktualizację produktów. Dodano: %s, "
+                    "zaktualizowano: %s, błędy: %s", inserted, updated, errors)

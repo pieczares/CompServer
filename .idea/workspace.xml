@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="870fdde8-3652-4972-91ca-ee7dce20938c" name="Changes" comment="zmiana api ofert, dodane api produktu, zmiana w bazie">
+    <list default="true" id="870fdde8-3652-4972-91ca-ee7dce20938c" name="Changes" comment="usuniecie">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/produkty.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/produkty.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/produkty.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/produkty.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schemas/produkty.py" beforeDir="false" afterPath="$PROJECT_DIR$/schemas/produkty.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/container.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/container.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +36,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -57,61 +61,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0000000001027725" />
-      <entry key="S30" value="1.0009581371668657" />
-      <entry key="S60" value="1.0557366838445401" />
-      <entry key="M2" value="1.547003840114094" />
-      <entry key="M5" value="4.640534413312972" />
-      <entry key="M10" value="9.848278546437207" />
-      <entry key="M15" value="14.148386977182621" />
-      <entry key="M30" value="25.711829870311732" />
-      <entry key="H1" value="46.59476545802598" />
-      <entry key="H2" value="76.42933173068259" />
-      <entry key="H4" value="107.30413621862071" />
-      <entry key="D1" value="152.43706639772623" />
-      <entry key="W1" value="163.11137724568894" />
+      <entry key="MS100" value="1.0461232642879916" />
+      <entry key="MS500" value="1.9726048902117632" />
+      <entry key="S2" value="3.710226677483523" />
+      <entry key="S5" value="6.300978837679112" />
+      <entry key="S10" value="8.829336271070904" />
+      <entry key="S30" value="11.832176535053623" />
+      <entry key="S60" value="12.846960100408381" />
+      <entry key="M2" value="13.407935440096459" />
+      <entry key="M5" value="14.137770686329956" />
+      <entry key="M10" value="16.69756234559363" />
+      <entry key="M15" value="20.064502210139292" />
+      <entry key="M30" value="30.905565724816363" />
+      <entry key="H1" value="51.80723602569259" />
+      <entry key="H2" value="82.85442981409635" />
+      <entry key="H4" value="115.85042004636168" />
+      <entry key="D1" value="165.1179875159309" />
+      <entry key="W1" value="176.90899972601218" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="2.496149297055941E-171" />
-      <entry key="S2" value="2.235209618449151E-43" />
-      <entry key="S5" value="8.744074131419236E-18" />
-      <entry key="S10" value="3.1500576732042917E-9" />
-      <entry key="S30" value="0.0020209831158134305" />
-      <entry key="S60" value="0.06409666093475637" />
-      <entry key="M2" value="0.43672984807833803" />
-      <entry key="M5" value="2.117514495698759" />
-      <entry key="M10" value="4.394720688486707" />
-      <entry key="M15" value="5.871130860843601" />
-      <entry key="M30" value="8.61597488825728" />
-      <entry key="H1" value="12.645137997042411" />
-      <entry key="H2" value="18.617510021240665" />
-      <entry key="H4" value="25.034602397019988" />
-      <entry key="D1" value="34.42026125622196" />
-      <entry key="W1" value="36.61336791441085" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="2.513485908254244E-206" />
+      <entry key="S5" value="5.7822532608025E-83" />
+      <entry key="S10" value="8.100468632159353E-42" />
+      <entry key="S30" value="2.7688104902914194E-14" />
+      <entry key="S60" value="2.3724697249797934E-7" />
+      <entry key="M2" value="8.402248294080872E-4" />
+      <entry key="M5" value="0.17357990513273724" />
+      <entry key="M10" value="1.2582525103273416" />
+      <entry key="M15" value="2.550426302630698" />
+      <entry key="M30" value="5.6787131760544245" />
+      <entry key="H1" value="10.265883411968748" />
+      <entry key="H2" value="16.774824049252377" />
+      <entry key="H4" value="23.763416881589617" />
+      <entry key="D1" value="34.12260617822636" />
+      <entry key="W1" value="36.56796789964513" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="3.63888551941051E-7" />
-      <entry key="MS500" value="0.05154584678813008" />
-      <entry key="S2" value="0.47648410721699563" />
-      <entry key="S5" value="0.743394541438603" />
-      <entry key="S10" value="0.862203309395231" />
-      <entry key="S30" value="0.9546929634003982" />
-      <entry key="S60" value="1.0940427100461771" />
-      <entry key="M2" value="1.9658034134342346" />
-      <entry key="M5" value="6.738843332326555" />
-      <entry key="M10" value="14.222092651218475" />
-      <entry key="M15" value="19.99928221601612" />
-      <entry key="M30" value="34.310717822262426" />
-      <entry key="H1" value="59.226535553903354" />
-      <entry key="H2" value="95.03723591709974" />
-      <entry key="H4" value="132.3325951209561" />
-      <entry key="D1" value="186.8560114449445" />
-      <entry key="W1" value="199.72454789598532" />
+      <entry key="MS100" value="0.880007474834093" />
+      <entry key="MS500" value="1.620549517972056" />
+      <entry key="S2" value="3.5074538208604364" />
+      <entry key="S5" value="6.202404877234003" />
+      <entry key="S10" value="8.776086358828291" />
+      <entry key="S30" value="11.81332797873821" />
+      <entry key="S60" value="12.837378176042725" />
+      <entry key="M2" value="13.403908777855793" />
+      <entry key="M5" value="14.30783309849646" />
+      <entry key="M10" value="17.948855797575604" />
+      <entry key="M15" value="22.605488887232557" />
+      <entry key="M30" value="36.572692235578415" />
+      <entry key="H1" value="62.062104326843546" />
+      <entry key="H2" value="99.62051753508966" />
+      <entry key="H4" value="139.60796475924926" />
+      <entry key="D1" value="199.23928209635815" />
+      <entry key="W1" value="213.47676963886022" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -141,7 +145,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;refactor/oop&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -191,7 +195,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-73a66231627c-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.10968.92" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-PY-262.11879.98" />
+        <option value="bundled-python-sdk-ebb3072d7bdf-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.11879.98" />
       </set>
     </attachedChunks>
   </component>
@@ -220,7 +225,17 @@
       <workItem from="1793358442655" duration="1287000" />
       <workItem from="1793725501481" duration="2804000" />
       <workItem from="1793787917400" duration="28000" />
-      <workItem from="1793793180870" duration="6348000" />
+      <workItem from="1793793180870" duration="6577000" />
+      <workItem from="1793812126513" duration="136000" />
+      <workItem from="1793813963064" duration="1440000" />
+      <workItem from="1793960066376" duration="1093000" />
+      <workItem from="1794219321491" duration="1603000" />
+      <workItem from="1794330400349" duration="106000" />
+      <workItem from="1794330532110" duration="1261000" />
+      <workItem from="1794823633664" duration="660000" />
+      <workItem from="1794913374914" duration="66000" />
+      <workItem from="1794935046854" duration="2624000" />
+      <workItem from="1794957428078" duration="6818000" />
     </task>
     <task id="LOCAL-00001" summary="przykladowy serwer testowo">
       <option name="closed" value="true" />
@@ -262,7 +277,23 @@
       <option name="project" value="LOCAL" />
       <updated>1793110719044</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="dodane pobieranie ilosci unkalnych produktow">
+      <option name="closed" value="true" />
+      <created>1793803314311</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1793803314311</updated>
+    </task>
+    <task id="LOCAL-00007" summary="usuniecie">
+      <option name="closed" value="true" />
+      <created>1794961542802</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1794961542802</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,11 +316,13 @@
     <MESSAGE value="pobieranie linkow i zapis do bazy" />
     <MESSAGE value="pobieranie, zapis i wysylanie produktow" />
     <MESSAGE value="zmiana api ofert, dodane api produktu, zmiana w bazie" />
-    <option name="LAST_COMMIT_MESSAGE" value="zmiana api ofert, dodane api produktu, zmiana w bazie" />
+    <MESSAGE value="dodane pobieranie ilosci unkalnych produktow" />
+    <MESSAGE value="usuniecie" />
+    <option name="LAST_COMMIT_MESSAGE" value="usuniecie" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CompServer$get_products.coverage" NAME="get_products Coverage Results" MODIFIED="1792402519013" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/services" />
-    <SUITE FILE_PATH="coverage/CompServer$main.coverage" NAME="main Coverage Results" MODIFIED="1793802257048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CompServer$main.coverage" NAME="main Coverage Results" MODIFIED="1794963095939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CompServer$session.coverage" NAME="session Coverage Results" MODIFIED="1792268366570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/db" />
     <SUITE FILE_PATH="coverage/CompServer$scheduler.coverage" NAME="scheduler Coverage Results" MODIFIED="1792405868369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

@@ -1,46 +1,45 @@
 import logging
 from contextlib import asynccontextmanager
 
+import uvicorn
 from fastapi import FastAPI
 
-from api.produkty import router as produkty_router
-from db.session import Base, engine
-from scheduler import create_scheduler
+from core.settings import Settings
+from core.container import Container
+from core.database import Database
+from db.session import Base, SessionLocal, engine
 
 
-logging.basicConfig(level=logging.INFO)
+class Application:
+    def __init__(self, settings: Settings | None = None) -> None:
+        logging.basicConfig(level=logging.INFO)
+        self.settings = settings or Settings()
+        self.container = Container(
+            self.settings, Database(Base, engine, SessionLocal))
+        self.app = self._create_app()
+
+    def _create_app(self) -> FastAPI:
+        app = FastAPI(title=self.settings.app_title, lifespan=self._lifespan)
+        for controller in self.container.controllers:
+            app.include_router(controller.router)
+        return app
+
+    @asynccontextmanager
+    async def _lifespan(self, app: FastAPI):
+        self.container.database.create_schema()
+        self.container.scheduler.start()
+        try:
+            yield
+        finally:
+            self.container.scheduler.shutdown()
+            self.container.database.dispose()
+
+    def run(self) -> None:
+        uvicorn.run(self.app, host=self.settings.host, port=self.settings.port)
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    Base.metadata.create_all(bind=engine)
-
-    scheduler = create_scheduler()
-    scheduler.start()
-
-    try:
-        yield
-    finally:
-        scheduler.shutdown(wait=True)
-        engine.dispose()
-
-
-app = FastAPI(
-    title="Serwer zadań cyklicznych",
-    lifespan=lifespan,
-)
-
-app.include_router(produkty_router)
-
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+application = Application()
+app = application.app
 
 if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(
-        app,
-        host="127.0.0.1",
-        port=8000,
-    )
+    application.run()

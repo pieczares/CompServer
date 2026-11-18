@@ -26,9 +26,7 @@ class Container:
         self.scheduler = JobScheduler(
             settings=settings,
             links_task=RefreshProductLinksTask(database.session_factory, link_service),
-            products_task=RefreshProductsTask(
-                database.session_factory, scraper, settings.products_links_limit
-            ),
+            products_task=RefreshProductsTask(database.session_factory, scraper, settings.products_links_limit),
         )
 
         self.controllers: list[Controller] = [

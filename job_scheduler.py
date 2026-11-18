@@ -8,10 +8,12 @@ from core.settings import Settings
 
 class JobScheduler:
     def __init__(self, settings: Settings, links_task: Callable[[], None],
-                 products_task: Callable[[], None]) -> None:
+                 products_task: Callable[[], None],
+                 names_task: Callable[[], None]) -> None:
         self._settings = settings
         self._links_task = links_task
         self._products_task = products_task
+        self._names_task = names_task
         self._scheduler = BackgroundScheduler(timezone="UTC")
 
     def _add_interval_job(self, func: Callable[[], None], job_id: str,
@@ -38,6 +40,10 @@ class JobScheduler:
             self._products_task, "refresh_products",
             now + timedelta(minutes=s.products_first_run_delay_minutes),
             hours=s.products_refresh_hours)
+        self._add_interval_job(
+            self._names_task, "refresh_product_names",
+            now + timedelta(minutes=s.names_first_run_delay_minutes),
+            hours=s.names_refresh_hours)
         self._scheduler.start()
 
     def shutdown(self) -> None:

@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from domain.product_name import ProductName
 from domain.scraped_product import ScrapedProduct
 
 
@@ -15,6 +16,14 @@ class ProductValidator:
         self._validate_price("brutto", data.cena_brutto)
         self._validate_unit(data.jednostka)
         return kod
+
+    def validate_name(self, data: ProductName) -> ProductName:
+        """Zwraca ProductName z oczyszczonym kodem i nazwą albo zgłasza ValueError."""
+        kod = self._validate_code(data.kod)
+        nazwa = (data.nazwa or "").strip()
+        if not nazwa:
+            raise ValueError(f"Pusta nazwa produktu dla kodu: {kod}")
+        return ProductName(kod=kod, nazwa=nazwa, url=data.url)
 
     def _validate_code(self, raw: str | None) -> str:
         kod = (raw or "").strip()

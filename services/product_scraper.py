@@ -3,8 +3,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from bs4 import BeautifulSoup
 
-from core.http import HttpSessionProvider
-from domain.scraping import ScrapedProduct, ScrapeError
+from core.http_session_provider import HttpSessionProvider
+from domain.scrape_error import ScrapeError
+from domain.scraped_product import ScrapedProduct
 from services.price_parser import PriceParser
 
 

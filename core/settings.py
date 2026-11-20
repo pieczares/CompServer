@@ -15,8 +15,8 @@ class Settings:
 
     links_refresh_days: int = 1
     products_refresh_hours: int = 12
-    products_first_run_delay_minutes: int = 3
+    products_first_run_delay_minutes: int = 5
 
-    names_refresh_hours: int = 24
+    names_refresh_hours: int = 96
     names_first_run_delay_minutes: int = 10
     names_batch_size: int = 200
